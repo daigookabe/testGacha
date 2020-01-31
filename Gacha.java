@@ -6,9 +6,17 @@ class Gacha {
 
     public static void main(String[] args) {
         int t = 0;
-        
-        for(String str : args){
-            t = Integer.parseInt(str);
+        if (args.length >= 3) {
+            System.out.println("!!引数の数がエラーです!!");
+            return;
+        }
+
+        if (args.length == 0 || args[0].equals("0")) {
+            t = 10;
+        } else {
+            for(String str : args) {
+                t = Integer.parseInt(str);
+            }
         }
 
         for (int i = 1; i <= t; i++){
