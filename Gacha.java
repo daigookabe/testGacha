@@ -5,29 +5,39 @@ class Gacha {
     static Random random = new Random(seed);
 
     public static void main(String[] args) {
-        int t = 0;
+        int normalCount = 0;
+        int specialCount = 0;
+
         if (args.length >= 3) {
             System.out.println("!!引数の数がエラーです!!");
             return;
         }
 
+        // ここでは引数がない、または引数1個目が０だった場合
         if (args.length == 0 || args[0].equals("0")) {
-            t = 10;
+            normalCount = 9;
+            specialCount = 1;
         } else {
-            for(String str : args) {
-                t = Integer.parseInt(str);
-            }
+            // for(String str : args) {
+            //     System.out.println("!!arg=" + str);
+
+            //     normalCount = Integer.parseInt(str);
+            // }
+            normalCount = Integer.parseInt(args[0]);
+            specialCount = Integer.parseInt(args[1]);
         }
 
-        for (int i = 1; i <= t; i++){
+        System.out.println(normalCount);
+
+        for (int i = 1; i <= normalCount; i++){
             if (i != 1 && i % 10 == 0) {
-                String itemName = getSpecialGachaItem(i, t);
+                String itemName = getSpecialGachaItem(i, normalCount);
                 System.out.println(itemName);
-                if (i == t) {
+                if (i == normalCount) {
                     break;
-                }
+                }          
             } else {
-                String itemName = getNormalGachaItem(i, t);
+                String itemName = getNormalGachaItem(i, normalCount);
                 System.out.println(itemName);
             }
         }        
