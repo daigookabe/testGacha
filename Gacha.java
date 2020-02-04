@@ -5,57 +5,45 @@ class Gacha {
     static Random random = new Random(seed);
 
     public static void main(String[] args) {
-        int normalCount = 0;
-        int specialCount = 0;
+        int normalCount = Integer.parseInt(args[0]);
+        int specialCount = Integer.parseInt(args[1]);
 
-        if (args.length >= 3) {
+        if (args.length != 2) {
             System.out.println("!!引数の数がエラーです!!");
             return;
-        }
-
-        // ここでは引数がない、または引数1個目が０だった場合
-        if (args.length == 0 || args[0].equals("0")) {
-            normalCount = 9;
-            specialCount = 1;
+        } else if (Integer.parseInt(args[0]) + Integer.parseInt(args[1]) == 0) {
+            System.out.println("!!引数に1以上を設定してください!!");
+            return;           
         } else {
-            // for(String str : args) {
-            //     System.out.println("!!arg=" + str);
-
-            //     normalCount = Integer.parseInt(str);
-            // }
-            normalCount = Integer.parseInt(args[0]);
-            specialCount = Integer.parseInt(args[1]);
+             normalCount = Integer.parseInt(args[0]);
+             specialCount = Integer.parseInt(args[1]);
         }
 
-        System.out.println(normalCount);
-
-        for (int i = 1; i <= normalCount; i++){
-            if (i != 1 && i % 10 == 0) {
-                String itemName = getSpecialGachaItem(i, normalCount);
+        // ノーマルチケットを使った場合
+        System.out.println("---ノーマルチケット結果---");
+        for (int iNormal = 1; iNormal <= normalCount; iNormal++){
+            if (iNormal != 1 && iNormal % 10 == 0) {
+                String itemName = getSpecialGachaItem(iNormal, normalCount);
                 System.out.println(itemName);
-                if (i == normalCount) {
+                if (iNormal == normalCount) {
                     break;
                 }          
             } else {
-                String itemName = getNormalGachaItem(i, normalCount);
+                String itemName = getNormalGachaItem(iNormal, normalCount);
                 System.out.println(itemName);
             }
-        }        
+        } 
+
+        // スペシャルチケットを使った場合
+        System.out.println("");
+        System.out.println("---スペシャルチケット結果---");
+        for (int iSpecial = 1; iSpecial <= specialCount; iSpecial++){
+            String itemName = getSpecialGachaItem(iSpecial, specialCount);
+            System.out.println(itemName);
+        }   
     }
 
-    public static String getSpecialGachaItem(int count, int time) {
-        String itemName;
-        int num = random.nextInt(101);
-        System.out.println("【" + count + "連目】　(⭐️10回目確率⭐️)");
-
-        if (0 <= num && num<= 19) {
-            itemName = "★★★　星3メダロット一式";
-        } else {
-            itemName = "★★　星2メダロット一式";
-        }
-        return itemName;
-    }
-
+    // ノーマルガチャのオッズ
     public static String getNormalGachaItem(int count, int time) {
         String itemName;
         int num = random.nextInt(101);
@@ -69,6 +57,20 @@ class Gacha {
             itemName = "★★　星2メダロット一式";
         } else {
             itemName = "★★　星2メダロットパーツ";
+        }
+        return itemName;
+    }
+
+    // スペシャルガチャのオッズ
+    public static String getSpecialGachaItem(int count, int time) {
+        String itemName;
+        int num = random.nextInt(101);
+        System.out.println("【" + count + "連目】　(⭐️スペシャルオッズ⭐️)");
+
+        if (0 <= num && num<= 19) {
+            itemName = "★★★　星3メダロット一式";
+        } else {
+            itemName = "★★　星2メダロット一式";
         }
         return itemName;
     }
