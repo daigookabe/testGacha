@@ -29,6 +29,7 @@ class Gacha {
         if (normalCount == 0){
             System.out.println("---ノーマルチケット結果---\nチケットを使用していません");
         } else {  
+            System.out.println("\n---ノーマルチケット結果---");
             for (int iNormal = 1; iNormal <= normalCount; iNormal++){
                 if (iNormal != 1 && iNormal % 10 == 0) {
                     String itemName = getSpecialGachaItem(iNormal, normalCount);
