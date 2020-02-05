@@ -5,6 +5,12 @@ class Gacha {
     static Random random = new Random(seed);
 
     public static void main(String[] args) {
+        // argsのnullチェック
+        if (args.length == 0) {
+            System.out.println("!!引数を設定してください!!");
+            return;
+        }
+
         int normalCount = Integer.parseInt(args[0]);
         int specialCount = Integer.parseInt(args[1]);
 
@@ -20,27 +26,33 @@ class Gacha {
         }
 
         // ノーマルチケットを使った場合
-        System.out.println("---ノーマルチケット結果---");
-        for (int iNormal = 1; iNormal <= normalCount; iNormal++){
-            if (iNormal != 1 && iNormal % 10 == 0) {
-                String itemName = getSpecialGachaItem(iNormal, normalCount);
-                System.out.println(itemName);
-                if (iNormal == normalCount) {
-                    break;
-                }          
-            } else {
-                String itemName = getNormalGachaItem(iNormal, normalCount);
+        if (normalCount == 0){
+            System.out.println("---ノーマルチケット結果---\nチケットを使用していません");
+        } else {  
+            for (int iNormal = 1; iNormal <= normalCount; iNormal++){
+                if (iNormal != 1 && iNormal % 10 == 0) {
+                    String itemName = getSpecialGachaItem(iNormal, normalCount);
+                    System.out.println(itemName);
+                    if (iNormal == normalCount) {
+                        break;
+                    }          
+                } else {
+                    String itemName = getNormalGachaItem(iNormal, normalCount);
+                    System.out.println(itemName);
+                }
+            } 
+        }
+
+        // スペシャルチケットを使った場合
+        if (specialCount == 0){
+            System.out.println("\n---スペシャルチケット結果---\nチケットを使用していません");
+        } else {
+            System.out.println("\n---スペシャルチケット結果---");
+            for (int iSpecial = 1; iSpecial <= specialCount; iSpecial++){
+                String itemName = getSpecialGachaItem(iSpecial, specialCount);
                 System.out.println(itemName);
             }
         } 
-
-        // スペシャルチケットを使った場合
-        System.out.println("");
-        System.out.println("---スペシャルチケット結果---");
-        for (int iSpecial = 1; iSpecial <= specialCount; iSpecial++){
-            String itemName = getSpecialGachaItem(iSpecial, specialCount);
-            System.out.println(itemName);
-        }   
     }
 
     // ノーマルガチャのオッズ
