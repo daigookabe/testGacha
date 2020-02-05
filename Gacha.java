@@ -19,7 +19,7 @@ class Gacha {
             return;
         } else if (Integer.parseInt(args[0]) + Integer.parseInt(args[1]) == 0) {
             System.out.println("!!引数に1以上を設定してください!!");
-            return;           
+            return;
         } else {
              normalCount = Integer.parseInt(args[0]);
              specialCount = Integer.parseInt(args[1]);
@@ -28,7 +28,7 @@ class Gacha {
         // ノーマルチケットを使った場合
         if (normalCount == 0){
             System.out.println("---ノーマルチケット結果---\nチケットを使用していません");
-        } else {  
+        } else {
             System.out.println("\n---ノーマルチケット結果---");
             for (int iNormal = 1; iNormal <= normalCount; iNormal++){
                 if (iNormal != 1 && iNormal % 10 == 0) {
@@ -36,12 +36,12 @@ class Gacha {
                     System.out.println(itemName);
                     if (iNormal == normalCount) {
                         break;
-                    }          
+                    }
                 } else {
                     String itemName = getNormalGachaItem(iNormal, normalCount);
                     System.out.println(itemName);
                 }
-            } 
+            }
         }
 
         // スペシャルチケットを使った場合
@@ -53,7 +53,7 @@ class Gacha {
                 String itemName = getSpecialGachaItem(iSpecial, specialCount);
                 System.out.println(itemName);
             }
-        } 
+        }
     }
 
     // ノーマルガチャのオッズ
