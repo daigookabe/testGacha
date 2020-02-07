@@ -5,24 +5,25 @@ class Gacha {
     static Random random = new Random(seed);
 
     public static void main(String[] args) {
-        // argsのnullチェック
-        if (args.length == 0) {
-            System.out.println("!!引数を設定してください!!");
+        // argsエラーチェック
+        try {
+            boolean argsCheck = isError(args);
+            if (argsCheck) {
+                return;
+            }
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return;
         }
+
 
         int normalCount = Integer.parseInt(args[0]);
         int specialCount = Integer.parseInt(args[1]);
 
-        if (args.length != 2) {
-            System.out.println("!!引数の数がエラーです!!");
-            return;
-        } else if (Integer.parseInt(args[0]) + Integer.parseInt(args[1]) == 0) {
+        // ノーマルチケットとスペシャルチケットがどちらも0だった場合
+        if (Integer.parseInt(args[0]) + Integer.parseInt(args[1]) == 0) {
             System.out.println("!!引数に1以上を設定してください!!");
             return;
-        } else {
-             normalCount = Integer.parseInt(args[0]);
-             specialCount = Integer.parseInt(args[1]);
         }
 
         // ノーマルチケットを使った場合
@@ -54,6 +55,26 @@ class Gacha {
                 System.out.println(itemName);
             }
         }
+    }
+
+    // argsのチェック
+    public static boolean isError(String[] args) {
+        boolean argsCheck = false;
+        String argsCheckResult = "";
+        if (args.length == 0) {
+            argsCheckResult = "!!引数を設定してください!!";
+        } else if (args.length == 1) {
+            argsCheckResult = "!!引数が少ないです!!";
+        } else if (args.length >= 3) {
+            argsCheckResult = "!!引数が多いです!!";
+        }
+
+       if (argsCheckResult.length() != 0) {
+           throw new IllegalArgumentException(argsCheckResult);
+       }
+
+        System.out.println(argsCheckResult);
+        return argsCheck;
     }
 
     // ノーマルガチャのオッズ
