@@ -1,0 +1,4 @@
+# classファイルは要らない
+*.class
+
+.DS_Store
